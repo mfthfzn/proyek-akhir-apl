@@ -1270,8 +1270,6 @@ void mainMenuCashier(Sparepart *sparepart[], int &currentSparepart, SparepartCha
           }
           break;
         case 2:
-          // Memanggil fungsi untuk membersihkan layar  
-          clearScreen();
           // Menampilkan header untuk ubah kuantitas sparepart dalam keranjang
           cout << "+===========================+\n";
           cout << "|      UBAH KUANTITAS       |\n";
@@ -1288,8 +1286,6 @@ void mainMenuCashier(Sparepart *sparepart[], int &currentSparepart, SparepartCha
           }
           break;
         case 3:
-          // Memanggil fungsi untuk membersihkan layar
-          clearScreen();
           // Menampilkan header untuk hapus sparepart dari daftar belanja
           cout << "+===========================+\n";
           cout << "| HAPUS DARI DAFTAR BELANJA |\n";
@@ -1372,18 +1368,18 @@ void addToChart(Sparepart *sparepart[], int &currentSparepart, SparepartChart *s
     */
     bool resultConvertQuantity = convertStringToInt(inputQuantity, quantity);
     
-    // Melakukan validasi terhadapa resultConvertQuantity, akan melakukan throw error jika convert gagal
-    if (!resultConvertQuantity) {
-      throw invalid_argument("Harap masukkan angka pada input quantity!");
-    }
-
     // Melakukan validasi semua input
     if (quantity < 0 || isStringEmpty(inputIDProduct)) {
       // Menampilkan pesan kesalahan input idProduct dan kuantitas
-      cout << "\n+--------------------------------------------------------+\n";
+      cout << "\n+---------------------------------------------------------+\n";
       cout << "| Masukkan ID product dan kuantitas sparepart yang valid! |\n";
       cout << "+---------------------------------------------------------+\n";
     } else {
+
+      // Melakukan validasi terhadapa resultConvertQuantity, akan melakukan throw error jika convert gagal
+      if (!resultConvertQuantity) {
+        throw invalid_argument("Harap masukkan angka pada input quantity!");
+      }
 
       // Mencari apakah id produk yang diinputkan telah terdaftar ke dalam keranjang
       int isExistIDProductChart = binarySearch(sparepartChart, currentSparepartChart, inputIDProduct);
